@@ -6,7 +6,7 @@
 /*   By: chaepark <chaepark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:18:01 by chaepark          #+#    #+#             */
-/*   Updated: 2022/05/01 01:22:41 by chaepark         ###   ########.fr       */
+/*   Updated: 2022/05/01 01:51:20 by chaepark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	sendMessage(int pid, char c)
 			if (kill(pid, SIGUSR2) == -1)
 				return (0);
 		}
-		usleep(100);
+		usleep(500);
 	}
 	return (1);
 }

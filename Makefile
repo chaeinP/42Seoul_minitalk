@@ -6,29 +6,37 @@
 #    By: chaepark <chaepark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 23:25:53 by chaepark          #+#    #+#              #
-#    Updated: 2022/04/27 00:59:11 by chaepark         ###   ########.fr        #
+#    Updated: 2022/04/29 18:30:02 by chaepark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minitalk
 SERVER = server
 CLIENT = client
+SRC = server.c client.c utils.c
+OBJ = ${SRC:.c=.o}
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(SERVER) $(CLIENT)
+$(NAME): $(SERVER) $(CLIENT)
 
-$(NAME): all
+$(SERVER): ${OBJ}
+	$(CC) $(CFLAGS) server.o utils.o -o $(SERVER)
 
-$(SERVER):
-	$(CC) $(CFLAGS) server.c utils.c -o $(SERVER)
+$(CLIENT): ${OBJ}
+	$(CC) $(CFLAGS) utils.o client.o -o $(CLIENT)
 
-$(CLIENT):
-	$(CC) $(CFLAGS) client.c utils.c -o $(CLIENT)
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
+
+all: $(NAME)
 
 clean:
-	rm $(CLIENT) $(SERVER)
+	rm -rf $(OBJ)
 
 fclean: clean
+	rm -rf server client
 
 re: fclean all
+
+.PHONY:	all clean fclean re

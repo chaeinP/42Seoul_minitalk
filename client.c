@@ -6,13 +6,13 @@
 /*   By: chaepark <chaepark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:18:01 by chaepark          #+#    #+#             */
-/*   Updated: 2022/05/01 01:51:20 by chaepark         ###   ########.fr       */
+/*   Updated: 2022/05/01 11:46:30 by chaepark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static int	sendMessage(int pid, char c)
+static int	send_message(int pid, char c)
 {
 	int	i;
 
@@ -48,12 +48,12 @@ int	main(int argc, char *argv[])
 	message = argv[2];
 	while (*message)
 	{
-		if (sendMessage(server_pid, *message) == 0)
+		if (send_message(server_pid, *message) == 0)
 		{
 			ft_putstr("error");
 			return (0);
 		}
 		message++;
 	}
-	sendMessage(server_pid, '\0');
+	send_message(server_pid, '\0');
 }
